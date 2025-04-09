@@ -1,5 +1,5 @@
+using ECA_backend.Extension;
 using ECA_backend.Interfaces;
-using ECA_backend.Middlewares;
 using ECA_backend.Services;
 
 var builder = WebApplication.CreateBuilder(args);

@@ -16,7 +16,7 @@ namespace ECA_backend.Controllers
             _pdfService = pdfService;
         }
 
-        [HttpPost]
+        [HttpPost("Analyze")]
         public async Task<IActionResult> getExtractedPDF([FromForm] GetPDFRequest request)
         {
             var result = await _pdfService.UploadPdfToAiService(request);

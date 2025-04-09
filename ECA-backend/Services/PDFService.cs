@@ -60,7 +60,7 @@ namespace ECA_backend.Services
 
                 var options = new JsonSerializerOptions
                 {
-                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase // Adjust if your JSON uses different casing
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                 };
                 AIServicePDFResponse result = JsonSerializer.Deserialize<AIServicePDFResponse>(jsonResult, options)!;
 
