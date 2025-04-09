@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Net.Http.Headers;
+using System.Text.Json;
 using ECA_backend.Contracts;
 using ECA_backend.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -22,16 +23,16 @@ namespace ECA_backend.Services
             IFormFile pdfFile = request.Pdf;
             using (var formData = new MultipartFormDataContent())
             {
-                // Convert IFormFile to stream
-                using (var stream = pdfFile.OpenReadStream())
+                using (var memoryStream = new MemoryStream())
                 {
-                    var pdfContent = new StreamContent(stream);
-                    pdfContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/pdf");
+                    await pdfFile.CopyToAsync(memoryStream);
+                    memoryStream.Position = 0;
+
+                    var pdfContent = new StreamContent(memoryStream);
+                    pdfContent.Headers.ContentType = new MediaTypeHeaderValue("application/pdf");
                     formData.Add(pdfContent, "file", pdfFile.FileName);
 
-                    //formData.Headers.Add(HeaderAuthName, ApiKey);
-
-                    HttpResponseMessage response = await client.PostAsync(aiServiceUploadUrl, formData);
+                    var response = await client.PostAsync(aiServiceUploadUrl, formData);
                     response.EnsureSuccessStatusCode();
 
                     if (response.Headers.TryGetValues(HeaderGETName, out var headerValues))

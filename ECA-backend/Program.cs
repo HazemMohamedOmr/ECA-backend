@@ -1,4 +1,5 @@
 using ECA_backend.Interfaces;
+using ECA_backend.Middlewares;
 using ECA_backend.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -34,6 +35,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseGlobalExceptionMiddleware();
 
 app.UseHttpsRedirection();
 
