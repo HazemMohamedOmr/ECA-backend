@@ -1,0 +1,6 @@
+@ECA_backend_HostAddress = http://localhost:5115
+
+GET {{ECA_backend_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
