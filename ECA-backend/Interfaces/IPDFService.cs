@@ -1,5 +1,4 @@
 ﻿using ECA_backend.Contracts;
-using Microsoft.AspNetCore.Mvc;
 
 namespace ECA_backend.Interfaces
 {

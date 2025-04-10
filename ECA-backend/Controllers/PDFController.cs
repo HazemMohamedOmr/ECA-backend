@@ -1,6 +1,5 @@
 ﻿using ECA_backend.Contracts;
 using ECA_backend.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECA_backend.Controllers

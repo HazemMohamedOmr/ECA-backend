@@ -2,7 +2,6 @@
 using System.Text.Json;
 using ECA_backend.Contracts;
 using ECA_backend.Interfaces;
-using Microsoft.AspNetCore.Mvc;
 
 namespace ECA_backend.Services
 {
@@ -67,7 +66,7 @@ namespace ECA_backend.Services
                 };
                 AIServicePDFResponse result = JsonSerializer.Deserialize<AIServicePDFResponse>(jsonResult, options)!;
 
-                if (IsProcessingComplete(result))
+                if (result?.Status?.ToLower() == "succeeded")
                 {
                     return result;
                 }
@@ -77,11 +76,6 @@ namespace ECA_backend.Services
             }
 
             throw new Exception("Operation timed out after maximum attempts");
-        }
-
-        private bool IsProcessingComplete(AIServicePDFResponse result)
-        {
-            return result?.Status?.ToLower() == "succeeded";
         }
     }
 }
