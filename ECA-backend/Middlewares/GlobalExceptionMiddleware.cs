@@ -36,17 +36,17 @@ namespace ECA_backend.Middlewares
             switch (exception)
             {
                 case ArgumentException argEx:
-                    code = HttpStatusCode.BadRequest; // 400
+                    code = HttpStatusCode.BadRequest;
                     message = argEx.Message;
                     break;
 
                 case UnauthorizedAccessException:
-                    code = HttpStatusCode.Unauthorized; // 401
+                    code = HttpStatusCode.Unauthorized;
                     message = "Unauthorized access";
                     break;
 
                 case KeyNotFoundException:
-                    code = HttpStatusCode.NotFound; // 404
+                    code = HttpStatusCode.NotFound;
                     message = "Resource not found";
                     break;
 

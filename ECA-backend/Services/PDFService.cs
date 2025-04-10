@@ -48,7 +48,10 @@ namespace ECA_backend.Services
 
         private async Task<AIServicePDFResponse> PollForResult(string url)
         {
-            while (true)
+            int maxAttempts = 300;
+            int attempt = 0;
+
+            while (attempt < maxAttempts)
             {
                 var response = await client.GetAsync(url);
                 var jsonResult = await response.Content.ReadAsStringAsync();
@@ -69,8 +72,11 @@ namespace ECA_backend.Services
                     return result;
                 }
 
-                await Task.Delay(500);
+                await Task.Delay(1000);
+                attempt++;
             }
+
+            throw new Exception("Operation timed out after maximum attempts");
         }
 
         private bool IsProcessingComplete(AIServicePDFResponse result)
